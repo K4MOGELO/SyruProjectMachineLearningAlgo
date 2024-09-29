@@ -35,17 +35,14 @@ def upload_file():
         file.save(file_path)
         
         if is_tar_road(file_path):  # this is what happens if the image contains a tar road
-            pothole_price = 0
-            meter_areas, edited_img = get_pothole_area(file_path)
-            for area in meter_areas:
-                price = get_pothole_model(area, 0, 1)
-                pothole_price += price
+            pothole_price , edited_img ,pothole_count,sizes_count,distributed_costs  = get_pothole_area(file_path)
 
             # Encode the edited image to base64
             _, buffer = cv2.imencode('.jpg', edited_img)
             img_str = base64.b64encode(buffer).decode('utf-8')
 
-            return jsonify({"message": f"The cost of this is R{pothole_price}", "img": img_str,"price":pothole_price})
+            return jsonify({"message": f"The cost of this is R{pothole_price}", "img": img_str,"price":pothole_price,"pothole_count":pothole_count,"sizes_count":sizes_count , "distributed_costs": distributed_costs })
+
 
         else:  # this happens when the image does not contain a tar road
             message = """The image does not contain a road, please enter an image with a road
