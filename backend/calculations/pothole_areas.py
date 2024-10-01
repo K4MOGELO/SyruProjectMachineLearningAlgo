@@ -39,9 +39,9 @@ def classify_potholes(pixel_area):
     medium_threshold = 50_000   # Medium potholes: from 10,001 to 50,000 pixels
 
     # Price settings per pothole size
-    small_pothole_price = 50
-    medium_pothole_price = 100
-    large_pothole_price = 200
+    small_pothole_price = 100
+    medium_pothole_price = 150
+    large_pothole_price = 250
 
     total_price = 0
     sizes_count = {'small': 0, 'medium': 0, 'large': 0}
